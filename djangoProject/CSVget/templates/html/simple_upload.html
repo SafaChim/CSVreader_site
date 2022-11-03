@@ -1,0 +1,14 @@
+{% extends "html/layout.html" %}
+
+{% block body %}
+    <form action="{% url 'CSVget:add' %}" method="post" enctype="multipart/form-data">
+        <div>
+            <h1> ABOBA </h1>
+            {% csrf_token %}
+            <label for="file">Choose file to upload</label>
+            <input type="file" name="csv" accept=".csv"/>
+            <button type="submit">Upload</button>
+        </div>
+    </form>
+    <a href="{% url 'CSVget:check' %}"> CHECK </a>
+{% endblock %}

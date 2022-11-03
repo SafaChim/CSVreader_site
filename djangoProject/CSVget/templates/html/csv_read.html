@@ -1,0 +1,12 @@
+{% extends "html/layout.html" %}
+
+{% block body %}
+    <h1> CSV FILE OPENING</h1>
+    <ul>
+        {% for row in rows %}
+            <li>{{ row }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'CSVget:add' %}"> ADD CSV FILE </a>
+{% endblock %}
+

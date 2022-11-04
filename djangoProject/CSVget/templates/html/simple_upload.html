@@ -5,8 +5,11 @@
         <div>
             <h1> ABOBA </h1>
             {% csrf_token %}
+
             <label for="file">Choose file to upload</label>
             <input type="file" name="csv" accept=".csv"/>
+            <label for="text">Write ur delimiter in csv exemple: ; </label>
+            <input type="text" name="input_del"/>
             <button type="submit">Upload</button>
         </div>
     </form>

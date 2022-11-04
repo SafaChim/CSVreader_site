@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+from django import forms
 from django.core.files.storage import FileSystemStorage as fs
 import csv
 import io
@@ -10,13 +11,17 @@ def add(request):
     if request.method == 'POST' and request.FILES['csv']:
         name = request.FILES['csv']
         file = name.read().decode('utf-8')
-        global rows
-        rows = list(csv.DictReader(io.StringIO(file), delimiter=';'))
-        for row in rows:
-            print(row)
-
-
-        return render(request, "html/simple_upload.html")
+        delim = request.POST['input_del']
+        if len(delim) == 1:
+            try:
+                print(delim)
+                global rows
+                rows = list(csv.DictReader(io.StringIO(file), delimiter=delim))
+                return render(request, "html/simple_upload.html")
+            except:
+                return HttpResponse("No such delimiter, refresh page and try again")
+        else:
+            return HttpResponse("one delimiter or NO, refresh page")
 
     return render(request, "html/simple_upload.html")
 
